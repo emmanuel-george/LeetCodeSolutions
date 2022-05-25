@@ -1,27 +1,80 @@
 class Solution:
     def searchRange(self, nums: List[int], target: int) -> List[int]:
-        if not nums: return [-1, -1]
-        N = len(nums)
-        st, end = -1, -1
-        l, r = 0, N
+        if not nums:
+            return [-1, -1]
 
-        while l < r:
-            mid = (l + r) // 2
-            if nums[mid] >= target:
-                r = mid
+        start = 0
+        end = len(nums) - 1
+        first = -1  # for first occurence
+        last = -1  # for last occurence
+        ans = []  # list for storing first and last occurences
+
+        # Find the first occurence
+        while start <= end:
+
+            mid = start + (end - start) // 2
+            if (nums[mid] == target):
+                first = mid
+                end = mid - 1
+            elif target < nums[mid]:
+                end = mid - 1
             else:
-                l = mid + 1
-        if l < N and nums[l] == target: st = l
+                start = mid + 1
 
-        l, r = 0, N
+        ans.append(first)
 
-        while l < r:
-            mid = (l + r) // 2
-            if nums[mid] <= target:
-                l = mid + 1
+        start = 0
+        end = len(nums) - 1
+
+        # Find the last occurence
+        while start <= end:
+
+            mid = start + (end - start) // 2
+            if (nums[mid] == target):
+                last = mid
+                start = mid + 1
+            elif target < nums[mid]:
+                end = mid - 1
             else:
-                r = mid
+                start = mid + 1
+        ans.append(last)
+        return ans def searchRange(self, nums: List[int], target: int) -> List[int]:
+        if not nums:
+            return [-1, -1]
 
-        if nums[r - 1] == target: end = r - 1
+        start = 0
+        end = len(nums) - 1
+        first = -1 # for first occurence
+        last = -1  # for last occurence
+        ans = []   # list for storing first and last occurences
 
-        return [st, end]
+        # Find the first occurence
+        while start <= end:
+
+            mid = start + (end -start)//2
+            if(nums[mid] == target):
+                first = mid
+                end = mid-1
+            elif target < nums[mid]:
+                end = mid - 1
+            else:
+                start = mid + 1
+
+        ans.append(first)
+
+        start = 0
+        end = len(nums) - 1
+
+        # Find the last occurence
+        while start <= end:
+
+            mid = start + (end -start)//2
+            if(nums[mid] == target):
+                last = mid
+                start = mid + 1
+            elif target < nums[mid]:
+                end = mid - 1
+            else:
+                start = mid + 1
+        ans.append(last)
+        return ans
