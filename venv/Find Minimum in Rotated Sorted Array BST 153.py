@@ -14,8 +14,8 @@ def findMin(nums:List[int])->int:
 
         if(nums[mid] <= nums[prev] and nums[mid] <= nums[next]):
             return nums[mid]
-        elif(nums[start] <= nums[mid]):
-            start = mid + 1
+        elif(nums[start] <= nums[mid] and nums[mid] >= nums[N-1]):
+            start = mid + 1 % N
         else:
-            end = mid - 1
+            end = mid + N - 1 % N
 
