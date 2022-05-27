@@ -24,6 +24,8 @@ def findMinPages(nums, size, noOfStudents):
     start = max(nums)
     end = sum(nums)
     res = -1
+    if(size < noOfStudents):
+        return -1
     while(start <= end):
         mid = start+(end-start)//2
         if(isValid(nums, size, noOfStudents, mid)):
